@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Flower Chafer Beetle — Урок, тест и видеокласс</title>
+<script src="https://meet.jit.si/external_api.js"></script>
+<style>
+:root{
+  --green:#16805b; --deep:#184d3b; --pale:#f1faf4; --line:#c7e5d3;
+  --gold:#d39b22; --purple:#7656d9; --teal:#159887; --coral:#e86b50; --ink:#173d32;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#f4faf6;line-height:1.5}
+header{background:linear-gradient(120deg,#126947,#35a772);color:#fff;padding:22px max(18px,calc((100% - 1140px)/2))}
+header h1{margin:0;font-size:clamp(1.6rem,4vw,2.3rem)}
+header p{margin:4px 0 0;font-size:1.02rem}
+
+.tab-nav{max-width:1140px;margin:16px auto 0;padding:0 14px;display:flex;gap:8px;flex-wrap:wrap}
+.tab-btn{background:#e2f2e8;border:2px solid #a8d7be;color:#185d41;padding:11px 18px;border-radius:10px 10px 0 0;font-weight:700;font-size:1rem;cursor:pointer;transition:background .2s}
+.tab-btn.active{background:#fff;border-bottom-color:#fff;color:#115137}
+.tab-btn.video-tab{border-color:#7bbde8;background:#e9f4fc;color:#1a5885}
+.tab-btn.video-tab.active{background:#fff;border-bottom-color:#fff;color:#0f466e}
+
+main{max-width:1140px;margin:0 auto 28px;padding:16px 14px 28px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;background:#fff;border:1px solid var(--line);border-radius:0 14px 14px 14px;box-shadow:0 4px 16px #1466430d}
+.tab-pane{display:contents}
+.tab-pane.hidden{display:none}
+
+section,.full{grid-column:1/-1}
+.col{background:#fafdfb;border:1px solid #d9ebe0;border-radius:12px;padding:14px}
+h2{font-size:1.15rem;margin:0 0 8px;color:var(--deep)}
+.num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;margin-right:8px;font-size:.9rem}
+.small{font-size:.9rem;color:#466c5d}
+.reading{background:#f4fbf6;border:1px solid #d3eadb;border-radius:10px;padding:12px 14px}
+.reading p{margin:0 0 8px}.reading p:last-child{margin-bottom:0}
+.q{padding:9px 0;border-bottom:1px solid #e2f0e7}.q:last-child{border-bottom:0}
+.q p{font-weight:bold;margin:0 0 6px}
+.options{display:flex;flex-wrap:wrap;gap:8px 16px}
+.options label{font-weight:normal;margin:0;cursor:pointer}
+.options input{accent-color:var(--green)}
+select,input[type=text],textarea{width:100%;padding:9px;border:1px solid #b9d9c5;border-radius:8px;background:#fff;color:#173d32;font-size:1rem}
+label{display:block;margin:8px 0 3px;font-weight:600}
+button{border:0;border-radius:9px;padding:10px 15px;font-size:.95rem;font-weight:700;cursor:pointer}
+.btn-primary{background:var(--green);color:#fff}
+.btn-teacher{background:#1d5c96;color:#fff}
+.btn-call{background:#1976d2;color:#fff;padding:10px 18px}
+.btn-leave{background:#d32f2f;color:#fff;padding:10px 18px}
+.btn-reset{background:#e6f3ea;color:#17513d}
+.btn-copy{background:#d8efe1;color:#13593d;padding:6px 12px;font-size:.85rem;margin-top:6px}
+.hint{background:#eff9f2;border-left:4px solid var(--green);padding:10px 12px;border-radius:8px;margin:8px 0}
+.wordbank{background:#fff8e6;border:1px solid #f2d58a;border-radius:9px;padding:8px 10px;color:#735518;font-size:.92rem;margin-bottom:8px}
+.match-item{padding:8px;border:1px solid #d5e8dc;border-radius:8px;background:#fff;margin:6px 0}
+.match-item b{display:block;margin-bottom:4px}
+.code-box{background:#f0f8f3;border:2px dashed #40a072;border-radius:12px;padding:16px;margin-top:14px;display:none}
+.code-text{width:100%;font-family:monospace;font-size:.95rem;padding:10px;background:#fff;border:1px solid #95d4b4;border-radius:6px;word-break:break-all}
+.teacher-results{margin-top:16px;display:none;background:#fbfdfe;border:1px solid #bedee0;border-radius:12px;padding:16px}
+.badge-ok{display:inline-block;background:#2e9d5d;color:#fff;padding:2px 8px;border-radius:12px;font-size:.8rem;font-weight:bold}
+.badge-err{display:inline-block;background:#dc4738;color:#fff;padding:2px 8px;border-radius:12px;font-size:.8rem;font-weight:bold}
+.t-row{display:grid;grid-template-columns:30px 1fr 1fr 80px;gap:8px;padding:7px 0;border-bottom:1px solid #e6f0ed;align-items:center;font-size:.92rem}
+.t-header{font-weight:bold;color:#134b35;background:#e9f4ee;padding:8px;border-radius:6px}
+
+/* Video room styles */
+.video-panel{display:flex;flex-direction:column;gap:12px}
+.video-toolbar{background:#eef6fc;border:1px solid #bedbf2;border-radius:10px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.video-container{width:100%;height:620px;border-radius:12px;overflow:hidden;background:#1a2530;box-shadow:0 4px 16px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;color:#fff}
+.video-placeholder{text-align:center;color:#9ebbd3;padding:20px}
+.video-placeholder h3{color:#fff;margin-bottom:6px}
+
+footer{max-width:1140px;margin:0 auto 24px;padding:0 14px;color:#547464;font-size:.9rem}
+@media(max-width:760px){
+  main{grid-template-columns:1fr}
+  .t-row{grid-template-columns:1fr;gap:4px;border-bottom:2px solid #e1ede6}
+  .video-container{height:460px}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>The Flower Chafer Beetle</h1>
+  <p>Интерактивный B1-урок &bull; Онлайн-тест с кодом &bull; Встроенный видеокласс с демонстрацией экрана</p>
+</header>
+
+<div class="tab-nav">
+  <button class="tab-btn active" id="tabStudentBtn" onclick="switchTab('student')">👨‍🎓 Урок и тест</button>
+  <button class="tab-btn video-tab" id="tabVideoBtn" onclick="switchTab('video')">📹 Видеозвонок и экран</button>
+  <button class="tab-btn" id="tabTeacherBtn" onclick="switchTab('teacher')">👩‍🏫 Панель учителя</button>
+</div>
+
+<main>
+  <!-- TAB 1: STUDENT LESSON & TEST -->
+  <div class="tab-pane" id="paneStudent">
+    <section class="full">
+      <h2><span class="num">1</span>Reading text: The Golden Flower Chafer</h2>
+      <div class="reading">
+        <p>The <b>flower chafer</b>, also known as the golden chafer, is a beautiful beetle with a shiny golden or metallic-green appearance and a somewhat flattened body. It is often seen on flowers in summer.</p>
+        <p>Most beetles open their hard wing covers, called <i>elytra</i>, when they fly. The golden chafer does not need to do this. Its back wings slide out from under the elytra and unfold through small cuts at the edges. This lets it take off quickly and fly fast. It is a nimble flier and can hover briefly above flowers.</p>
+        <p>Although it looks metallic, the beetle has no pigment. Its colour comes from light reflecting from microscopic layers on its body (<i>iridescence</i>). This camouflage helps it blend into green surroundings and escape predators.</p>
+        <p>Golden chafers are herbivores. Adults eat nectar, flowers, and overripe fruit, while underground larvae feed on decaying wood and plant matter.</p>
+      </div>
+    </section>
+
+    <section class="full" style="background:#eef7f2;border:1px solid #bde2cc;border-radius:10px;padding:12px">
+      <label style="margin:0 0 5px;color:#125238"><b>Имя и фамилия ученика:</b></label>
+      <input type="text" id="studentName" placeholder="Например: Анна Смирнова" style="max-width:380px">
+    </section>
+
+    <!-- Warm-up -->
+    <div class="col">
+      <h2><span class="num" style="background:var(--gold)">2</span>Warm-up Question</h2>
+      <div class="q">
+        <p>1. What creates the beetle's metallic colour?</p>
+        <div class="options">
+          <label><input type="radio" name="sq_1" value="a"> Real gold pigment</label>
+          <label><input type="radio" name="sq_1" value="b"> Changing temperature</label>
+          <label><input type="radio" name="sq_1" value="c"> Light reflection from microscopic layers</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Match definitions -->
+    <div class="col">
+      <h2><span class="num" style="background:var(--purple)">3</span>Match meanings</h2>
+      <div class="match-item"><b>2. reflect off:</b>
+        <select id="s_q2"><option value="">Choose...</option><option value="a">move smoothly from below</option><option value="b">send light back from a surface</option><option value="c">begin flying</option><option value="d">mix visually with surroundings</option></select>
+      </div>
+      <div class="match-item"><b>3. slide out:</b>
+        <select id="s_q3"><option value="">Choose...</option><option value="a">move smoothly from below</option><option value="b">send light back from a surface</option><option value="c">begin flying</option><option value="d">mix visually with surroundings</option></select>
+      </div>
+      <div class="match-item"><b>4. take off:</b>
+        <select id="s_q4"><option value="">Choose...</option><option value="a">move smoothly from below</option><option value="b">send light back from a surface</option><option value="c">begin flying</option><option value="d">mix visually with surroundings</option></select>
+      </div>
+      <div class="match-item"><b>5. blend into:</b>
+        <select id="s_q5"><option value="">Choose...</option><option value="a">move smoothly from below</option><option value="b">send light back from a surface</option><option value="c">begin flying</option><option value="d">mix visually with surroundings</option></select>
+      </div>
+    </div>
+
+    <!-- Comprehension -->
+    <div class="col">
+      <h2><span class="num" style="background:var(--coral)">4</span>Comprehension</h2>
+      <div class="q">
+        <p>6. Why can the chafer fly without opening its elytra?</p>
+        <div class="options">
+          <label><input type="radio" name="sq_6" value="a"> Its body is very light</label>
+          <label><input type="radio" name="sq_6" value="b"> Its back wings slide out and unfold</label>
+          <label><input type="radio" name="sq_6" value="c"> It has no back wings</label>
+        </div>
+      </div>
+      <div class="q">
+        <p>7. What causes its metallic colour?</p>
+        <div class="options">
+          <label><input type="radio" name="sq_7" value="a"> A golden liquid</label>
+          <label><input type="radio" name="sq_7" value="b"> Heat from the sun</label>
+          <label><input type="radio" name="sq_7" value="c"> Light reflected from layers</label>
+        </div>
+      </div>
+      <div class="q">
+        <p>8. What do adult golden chafers eat?</p>
+        <div class="options">
+          <label><input type="radio" name="sq_8" value="a"> Nectar, flowers, overripe fruit</label>
+          <label><input type="radio" name="sq_8" value="b"> Small insects</label>
+          <label><input type="radio" name="sq_8" value="c"> Only decaying wood</label>
+        </div>
+      </div>
+      <div class="q">
+        <p>9. Where do larvae live?</p>
+        <div class="options">
+          <label><input type="radio" name="sq_9" value="a"> In flower petals</label>
+          <label><input type="radio" name="sq_9" value="b"> In the soil</label>
+          <label><input type="radio" name="sq_9" value="c"> In the air</label>
+        </div>
+      </div>
+      <div class="q">
+        <p>10. How can iridescence help the chafer?</p>
+        <div class="options">
+          <label><input type="radio" name="sq_10" value="a"> Helps the beetle camouflage itself</label>
+          <label><input type="radio" name="sq_10" value="b"> Attracts predators</label>
+          <label><input type="radio" name="sq_10" value="c"> Makes wings heavier</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vocabulary Gap-fill -->
+    <div class="col">
+      <h2><span class="num" style="background:#e15f87">5</span>Vocabulary Gap-fill</h2>
+      <div class="wordbank">captivity &bull; hovering &bull; unfolded &bull; blend into &bull; herbivore &bull; overripe &bull; nimble &bull; flattened</div>
+      <label>11. Not thriving in: <input type="text" id="s_q11" placeholder="enter word"></label>
+      <label>12. The beetle was: <input type="text" id="s_q12" placeholder="enter word"></label>
+      <label>13. Back wings: <input type="text" id="s_q13" placeholder="enter word"></label>
+      <label>14. Help insect: <input type="text" id="s_q14" placeholder="enter word"></label>
+      <label>15. Strict plant eater: <input type="text" id="s_q15" placeholder="enter word"></label>
+      <label>16. Soft summer fruit: <input type="text" id="s_q16" placeholder="enter word"></label>
+      <label>17. Quick and agile: <input type="text" id="s_q17" placeholder="enter word"></label>
+      <label>18. Oval body shape: <input type="text" id="s_q18" placeholder="enter word"></label>
+    </div>
+
+    <!-- Second Conditional -->
+    <div class="col full">
+      <h2><span class="num" style="background:var(--teal)">6</span>Second Conditional (Grammar)</h2>
+      <div class="hint"><b>Rule:</b> If + Past Simple, ... would + base verb</div>
+      <label>19. If animals didn't have camouflage, they <input type="text" id="s_q19" style="max-width:240px;display:inline-block"> easy to see. <i>(be)</i></label>
+      <label>20. If the wings were closed, they <input type="text" id="s_q20" style="max-width:240px;display:inline-block"> quickly. <i>(not slide out)</i></label>
+      <label>21. If the fruit weren't overripe, it <input type="text" id="s_q21" style="max-width:240px;display:inline-block"> so fast. <i>(not decay)</i></label>
+      <label>22. If the jacket were green, it <input type="text" id="s_q22" style="max-width:240px;display:inline-block"> the forest better. <i>(blend into)</i></label>
+      <label>23. If the beetle were scared, it <input type="text" id="s_q23" style="max-width:240px;display:inline-block"> its wings. <i>(unfold)</i></label>
+    </div>
+
+    <!-- Open reflection -->
+    <div class="col full">
+      <h2><span class="num" style="background:#8a67d6">7</span>Idiom &amp; Reflection (Open answer)</h2>
+      <p><i>As snug as a bug in a rug</i> = warm, safe, and comfortable. Where or when do you feel that way?</p>
+      <textarea id="s_q24" rows="3" placeholder="Write 1-2 sentences..."></textarea>
+    </div>
+
+    <!-- Finish button -->
+    <section class="full" style="text-align:center;padding:20px 14px">
+      <button class="btn-primary" style="font-size:1.15rem;padding:14px 28px" onclick="finishAndGenerateCode()">✅ Готово! Сформировать код для учителя</button>
+      <div class="code-box" id="studentCodeBox">
+        <h3 style="margin-top:0;color:#105738">Код с вашими ответами успешно сформирован!</h3>
+        <p class="small" style="color:#2d5b47">Скопируйте текст из рамки ниже и отправьте его учителю в чат или мессенджер:</p>
+        <textarea class="code-text" id="generatedCode" rows="4" readonly></textarea><br>
+        <button class="btn-copy" onclick="copyStudentCode()">📋 Скопировать код в буфер</button>
+        <span id="copyMsg" style="margin-left:8px;font-weight:bold;color:#1e7e4a"></span>
+      </div>
+    </section>
+  </div>
+
+  <!-- TAB 2: VIDEO CALL & SCREEN SHARING -->
+  <div class="tab-pane hidden" id="paneVideo">
+    <section class="full video-panel">
+      <h2>📹 Онлайн-видеокласс и демонстрация экрана</h2>
+      <div class="video-toolbar">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <label style="margin:0;font-weight:bold;color:#164e75">Имя комнаты:</label>
+          <input type="text" id="roomNameInput" value="FlowerChafer-Lesson-2026" style="width:230px;padding:6px 10px">
+          <label style="margin:0;font-weight:bold;color:#164e75">Ваше имя:</label>
+          <input type="text" id="userDisplayName" placeholder="Учитель / Ученик" style="width:170px;padding:6px 10px">
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn-call" id="startCallBtn" onclick="initJitsiMeet()">🚀 Войти в звонок</button>
+          <button class="btn-leave" id="leaveCallBtn" onclick="leaveJitsiMeet()" style="display:none">Покинуть звонок</button>
+        </div>
+      </div>
+
+      <div class="hint" style="background:#eef6fc;border-left-color:#1976d2;color:#164e75">
+        <b>💡 Возможности вкладки:</b> Звонок работает прямо в браузере через защищенный WebRTC. Вы можете включать/выключать камеру и микрофон, а также нажимать иконку монитора <b>«Share your screen»</b> для трансляции экрана или отдельного окна браузера с материалами урока.
+      </div>
+
+      <div class="video-container" id="meetContainer">
+        <div class="video-placeholder" id="videoPlaceholder">
+          <h3>Звонок еще не начат</h3>
+          <p>Введите название комнаты, свое имя и нажмите кнопку <b>«Войти в звонок»</b> выше.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- TAB 3: TEACHER VERIFICATION -->
+  <div class="tab-pane hidden" id="paneTeacher">
+    <section class="full">
+      <h2>👩‍🏫 Проверка ответов ученика</h2>
+      <p class="small">Вставьте зашифрованный код ученика и нажмите <b>«Проверить код»</b>.</p>
+      <textarea id="teacherInputCode" rows="4" placeholder="Вставьте сюда код ученика (начинается с VUROK:)..."></textarea>
+      <div style="margin-top:10px">
+        <button class="btn-teacher" onclick="decodeAndVerify()">🔍 Проверить код</button>
+        <button class="btn-reset" onclick="clearTeacherPane()">Очистить</button>
+      </div>
+
+      <div class="teacher-results" id="teacherResults">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;border-bottom:2px solid #bce1ce;padding-bottom:10px">
+          <div>
+            <h3 style="margin:0 0 4px;color:#135237" id="resStudentName">Ученик: —</h3>
+            <span class="small" id="resTimestamp">Время сдачи: —</span>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:1.4rem;font-weight:bold;color:#135237" id="resScore">0 / 23</div>
+            <span class="small" id="resPercent">0% верно</span>
+          </div>
+        </div>
+
+        <h4 style="margin:14px 0 8px;color:#1b503d">Таблица ответов:</h4>
+        <div class="t-row t-header">
+          <div>№</div>
+          <div>Ответ ученика</div>
+          <div>Правильный ответ</div>
+          <div>Статус</div>
+        </div>
+        <div id="tableRows"></div>
+
+        <div style="margin-top:16px;background:#f3f7f5;border-radius:8px;padding:12px">
+          <b style="color:#19503c">Открытый ответ (Задание 24 - Speaking/Idiom):</b>
+          <p id="resOpenText" style="margin:6px 0 0;font-style:italic;color:#284f3e">—</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>Интерактивный урок, встроенный видеокласс и система проверки &middot; Полная совместимость с GitHub Pages (HTTPS).</footer>
+
+<script>
+// Answer key
+const KEYS = {
+  1: {ans: "c", label: "C (Light reflection)"},
+  2: {ans: "b", label: "send light back"},
+  3: {ans: "a", label: "move smoothly from below"},
+  4: {ans: "c", label: "begin flying"},
+  5: {ans: "d", label: "mix visually with surroundings"},
+  6: {ans: "b", label: "B (Back wings slide out)"},
+  7: {ans: "c", label: "C (Reflected light)"},
+  8: {ans: "a", label: "A (Nectar, flowers, overripe fruit)"},
+  9: {ans: "b", label: "B (In the soil)"},
+  10: {ans: "a", label: "A (Camouflage against predators)"},
+  11: {ans: "captivity", label: "captivity"},
+  12: {ans: "hovering", label: "hovering"},
+  13: {ans: "unfolded", label: "unfolded"},
+  14: {ans: "blend into", label: "blend into"},
+  15: {ans: "herbivore", label: "herbivore"},
+  16: {ans: "overripe", label: "overripe"},
+  17: {ans: "nimble", label: "nimble"},
+  18: {ans: "flattened", label: "flattened"},
+  19: {ans: "would be", label: "would be"},
+  20: {ans: "would not slide out", label: "would not slide out"},
+  21: {ans: "would not decay", label: "would not decay"},
+  22: {ans: "would blend into", label: "would blend into"},
+  23: {ans: "would unfold", label: "would unfold"}
+};
+
+function clean(v){
+  return (v||"").trim().toLowerCase().replace(/\s+/g,' ');
+}
+
+// Navigation between tabs
+function switchTab(tab){
+  const tabs = ['student', 'video', 'teacher'];
+  tabs.forEach(t => {
+    const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1) + 'Btn');
+    const pane = document.getElementById('pane' + t.charAt(0).toUpperCase() + t.slice(1));
+    if (t === tab) {
+      btn.classList.add('active');
+      pane.classList.remove('hidden');
+    } else {
+      btn.classList.remove('active');
+      pane.classList.add('hidden');
+    }
+  });
+}
+
+// Student finishes test -> serialize & encode
+function finishAndGenerateCode(){
+  const student = document.getElementById('studentName').value.trim() || "Анонимный ученик";
+  const answers = {};
+
+  const radioIds = [1, 6, 7, 8, 9, 10];
+  radioIds.forEach(num => {
+    const r = document.querySelector(`input[name="sq_${num}"]:checked`);
+    answers[num] = r ? r.value : "";
+  });
+
+  for(let i=2; i<=5; i++){
+    answers[i] = document.getElementById(`s_q${i}`).value;
+  }
+  for(let i=11; i<=18; i++){
+    answers[i] = document.getElementById(`s_q${i}`).value.trim();
+  }
+  for(let i=19; i<=23; i++){
+    answers[i] = document.getElementById(`s_q${i}`).value.trim();
+  }
+  answers[24] = document.getElementById('s_q24').value.trim();
+
+  const payload = {
+    student: student,
+    ts: new Date().toLocaleString('ru-RU'),
+    answers: answers
+  };
+
+  const jsonStr = JSON.stringify(payload);
+  const encoded = "VUROK:" + btoa(encodeURIComponent(jsonStr));
+
+  const codeBox = document.getElementById('studentCodeBox');
+  const codeArea = document.getElementById('generatedCode');
+  codeArea.value = encoded;
+  codeBox.style.display = 'block';
+  codeBox.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function copyStudentCode(){
+  const copyText = document.getElementById('generatedCode');
+  copyText.select();
+  navigator.clipboard.writeText(copyText.value).then(()=>{
+    const msg = document.getElementById('copyMsg');
+    msg.textContent = "Скопировано!";
+    setTimeout(()=>{ msg.textContent = ""; }, 2500);
+  });
+}
+
+// Teacher verifies code
+function decodeAndVerify(){
+  const raw = document.getElementById('teacherInputCode').value.trim();
+  if(!raw){
+    alert("Пожалуйста, вставьте код ученика в поле.");
+    return;
+  }
+
+  let base64 = raw;
+  if(raw.startsWith("VUROK:")){
+    base64 = raw.substring(6).trim();
+  }
+
+  let payload;
+  try {
+    const jsonStr = decodeURIComponent(atob(base64));
+    payload = JSON.parse(jsonStr);
+  } catch(e) {
+    alert("Неверный формат кода! Убедитесь, что код скопирован полностью.");
+    return;
+  }
+
+  document.getElementById('resStudentName').textContent = "Ученик: " + (payload.student || "Без имени");
+  document.getElementById('resTimestamp').textContent = "Сдано: " + (payload.ts || "—");
+
+  let score = 0;
+  const total = 23;
+  const table = document.getElementById('tableRows');
+  table.innerHTML = "";
+
+  for(let i=1; i<=23; i++){
+    const userVal = payload.answers[i] || "";
+    const key = KEYS[i];
+    const isCorrect = clean(userVal) === clean(key.ans);
+
+    if(isCorrect) score++;
+
+    const row = document.createElement('div');
+    row.className = 't-row';
+    row.style.background = isCorrect ? '#f2fcf6' : '#fff5f4';
+
+    const dispUser = userVal ? userVal : '<i style="color:#888">&lt;нет ответа&gt;</i>';
+    const statusBadge = isCorrect 
+      ? '<span class="badge-ok">✓ Верно (+1)</span>' 
+      : '<span class="badge-err">✗ Ошибка (0)</span>';
+
+    row.innerHTML = `
+      <div style="font-weight:bold;color:#456">${i}</div>
+      <div>${dispUser}</div>
+      <div style="color:#185d41"><b>${key.label}</b></div>
+      <div>${statusBadge}</div>
+    `;
+    table.appendChild(row);
+  }
+
+  document.getElementById('resScore').textContent = `${score} / ${total}`;
+  const pct = Math.round((score / total) * 100);
+  document.getElementById('resPercent').textContent = `${pct}% правильных ответов`;
+
+  const openAns = payload.answers[24];
+  document.getElementById('resOpenText').textContent = openAns ? `"${openAns}"` : "<Ученик оставил поле пустым>";
+
+  const resPanel = document.getElementById('teacherResults');
+  resPanel.style.display = 'block';
+  resPanel.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function clearTeacherPane(){
+  document.getElementById('teacherInputCode').value = '';
+  document.getElementById('teacherResults').style.display = 'none';
+}
+
+// Jitsi Meet Video Call & Screen Sharing
+let jitsiApi = null;
+
+function initJitsiMeet(){
+  const container = document.getElementById('meetContainer');
+  const placeholder = document.getElementById('videoPlaceholder');
+  const room = document.getElementById('roomNameInput').value.trim() || 'EnglishLessonRoom';
+  const displayName = document.getElementById('userDisplayName').value.trim() || 'Guest';
+
+  // If already active, close prior
+  if(jitsiApi){
+    jitsiApi.dispose();
+  }
+
+  placeholder.style.display = 'none';
+
+  const domain = "meet.jit.si";
+  const options = {
+    roomName: room,
+    width: "100%",
+    height: "100%",
+    parentNode: container,
+    userInfo: {
+      displayName: displayName
+    },
+    configOverwrite: {
+      startWithAudioMuted: false,
+      startWithVideoMuted: false,
+      prejoinPageEnabled: false,
+      disableDeepLinking: true
+    },
+    interfaceConfigOverwrite: {
+      TOOLBAR_BUTTONS: [
+        'microphone', 'camera', 'desktop', // desktop = Screen Sharing!
+        'chat', 'raisehand', 'videoquality', 'filmstrip',
+        'tileview', 'fullscreen', 'hangup'
+      ],
+      SHOW_JITSI_WATERMARK: false,
+      SHOW_WATERMARK_FOR_GUESTS: false
+    }
+  };
+
+  jitsiApi = new JitsiMeetExternalAPI(domain, options);
+
+  document.getElementById('startCallBtn').style.display = 'none';
+  document.getElementById('leaveCallBtn').style.display = 'inline-block';
+
+  jitsiApi.addEventListeners({
+    videoConferenceLeft: function(){
+      leaveJitsiMeet();
+    }
+  });
+}
+
+function leaveJitsiMeet(){
+  if(jitsiApi){
+    jitsiApi.dispose();
+    jitsiApi = null;
+  }
+  document.getElementById('videoPlaceholder').style.display = 'block';
+  document.getElementById('startCallBtn').style.display = 'inline-block';
+  document.getElementById('leaveCallBtn').style.display = 'none';
+}
+</script>
+</body>
+</html>
